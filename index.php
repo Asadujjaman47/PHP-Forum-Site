@@ -60,7 +60,6 @@
                 // echo $row['category_id'];
                 // echo $row['category_name'];
                 
- 
                 
                 $id = $row['category_id'];                
                 $cat = $row['category_name'];                

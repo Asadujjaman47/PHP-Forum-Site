@@ -41,33 +41,40 @@
             <p>This is a peer to peer forum. No Spam / Advertising / Self-promote in the forums is not allowed. Do not
                 post copyright-infringing material. Do not post “offensive” posts, links or images. Do not cross post
                 questions. Remain respectful of other members at all times.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <a class="btn btn-success btn-lg" href="#" role="button">Learn more</a>
         </div>
     </div>
 
     <div class="container">
         <h1 class="py-2">Browse Questions</h1>
-        <div class=" media my-3">
-            <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
-            <div class="media-body">
-                <h5 class="mt-0">Unable to install Pyaudio error in Windows</h5>
-                <p>Will you do the same for me? It's time to face the music I'm no longer your muse. Heard it's
-                    beautiful, be the judge and my girls gonna take a vote. I can feel a phoenix inside of me. Heaven is
-                    jealous of our love, angels are crying from up above. Yeah, you take me to utopia.</p>
-            </div>
-        </div>
 
-        <div class="media my-3">
-            <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
-            <div class="media-body">
-                <h5 class="mt-0">Unable to install Pyaudio error in Windows</h5>
-                <p>Will you do the same for me? It's time to face the music I'm no longer your muse. Heard it's
-                    beautiful, be the judge and my girls gonna take a vote. I can feel a phoenix inside of me. Heaven is
-                    jealous of our love, angels are crying from up above. Yeah, you take me to utopia.</p>
-            </div>
-        </div>
+        <?php
 
-        <div class="media my-3">
+        $id = $_GET['catid'];
+
+        $sql = "SELECT * FROM `threads` WHERE thread_cat_id=$id";
+        
+        $result = mysqli_query($conn,$sql);
+
+        while($row = mysqli_fetch_assoc($result)){
+            $id = $row['thread_id'];
+            $title = $row['thread_title'];
+            $desc = $row['thread_desc'];
+        
+            echo '
+                <div class=" media my-3">
+                    <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
+                    <div class="media-body">
+                        <h5 class="mt-0"><a class="text-dark" href="thread.php">'. $title .'</a></h5>
+                        <p>'. $desc .'</p>
+                    </div>
+                </div>';
+        }
+
+        ?>
+
+        <!-- Remove later; Putting this just to check html alignment for now  -->
+        <!-- <div class="media my-3">
             <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
             <div class="media-body">
                 <h5 class="mt-0">Unable to install Pyaudio error in Windows</h5>
@@ -75,7 +82,7 @@
                     beautiful, be the judge and my girls gonna take a vote. I can feel a phoenix inside of me. Heaven is
                     jealous of our love, angels are crying from up above. Yeah, you take me to utopia.</p>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
