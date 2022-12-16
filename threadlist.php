@@ -17,15 +17,26 @@
     <?php include 'partials/_header.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
 
+    <?php
+
+    $id = $_GET['catid'];
+
+    $sql = "SELECT * FROM `categories` WHERE category_id=$id";
+    $result = mysqli_query($conn,$sql);
+
+    while($row = mysqli_fetch_assoc($result)){
+        $catname = $row['category_name'];
+        $catdes = $row['category_description'];
+    }
+
+    ?>
 
 
     <!-- Category container starts here   Ca -->
     <div class="container my-4">
         <div class="jumbotron">
-            <h1 class="display-4">Welcome to Python forums</h1>
-            <p class="lead">Python is a high-level, general-purpose programming language. Its design philosophy
-                emphasizes code readability with the use of significant indentation. Python is dynamically-typed and
-                garbage-collected.</p>
+            <h1 class="display-4">Welcome to <?php echo $catname; ?> forums</h1>
+            <p class="lead"><?php echo $catdes; ?></p>
             <hr class="my-4">
             <p>This is a peer to peer forum. No Spam / Advertising / Self-promote in the forums is not allowed. Do not
                 post copyright-infringing material. Do not post “offensive” posts, links or images. Do not cross post
