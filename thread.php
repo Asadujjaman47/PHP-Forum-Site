@@ -24,14 +24,14 @@
 
     <?php
 
-    $id = $_GET['catid'];
+    $id = $_GET['threadid'];
 
-    $sql = "SELECT * FROM `categories` WHERE category_id=$id";
+    $sql = "SELECT * FROM `threads` WHERE thread_id=$id";
     $result = mysqli_query($conn,$sql);
 
     while($row = mysqli_fetch_assoc($result)){
-        $catname = $row['category_name'];
-        $catdes = $row['category_description'];
+        $title = $row['thread_title'];
+        $desc = $row['thread_desc'];
     }
 
     ?>
@@ -40,20 +40,21 @@
     <!-- Category container starts here   Ca -->
     <div class="container my-4">
         <div class="jumbotron">
-            <h1 class="display-4">Welcome to <?php echo $catname; ?> forums</h1>
-            <p class="lead"><?php echo $catdes; ?></p>
+            <h1 class="display-4"><?php echo $title; ?></h1>
+            <p class="lead"><?php echo $desc; ?></p>
             <hr class="my-4">
             <p>This is a peer to peer forum. No Spam / Advertising / Self-promote in the forums is not allowed. Do not
                 post copyright-infringing material. Do not post “offensive” posts, links or images. Do not cross post
                 questions. Remain respectful of other members at all times.</p>
-            <a class="btn btn-success btn-lg" href="#" role="button">Learn more</a>
+            <p><b>Posted by: Harry</b></p>
         </div>
     </div>
+    
 
     <div class="container" id="ques">
-        <h1 class="py-2">Browse Questions</h1>
+        <h1 class="py-2">Discussions</h1>
 
-        <?php
+        <!-- <?php
 
         $id = $_GET['catid'];
 
@@ -70,13 +71,13 @@
                 <div class=" media my-3">
                     <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
                     <div class="media-body">
-                        <h5 class="mt-0"><a class="text-dark" href="thread.php?threadid='. $id .'">'. $title .'</a></h5>
+                        <h5 class="mt-0"><a class="text-dark" href="thread.php">'. $title .'</a></h5>
                         <p>'. $desc .'</p>
                     </div>
                 </div>';
         }
 
-        ?>
+        ?> -->
 
     </div>
 

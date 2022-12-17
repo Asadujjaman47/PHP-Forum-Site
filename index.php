@@ -9,7 +9,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
+    
+    <style>
+        #ques{
+            min-height : 433px;
+        }
+    </style>
+    
     <title>Welcome to iDiscuss - Coding Forums</title>
 </head>
 
@@ -47,7 +53,7 @@
     </div>
 
     <!-- Category container starts here   Ca -->
-    <div class="container my-4">
+    <div class="container my-4" id="ques">
         <h2 class="text-center my-4">iDiscuss - Browse Categories</h2>
         <div class="row my-4">
             <!-- Fetch all the categories  -->
