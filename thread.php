@@ -27,7 +27,7 @@
     $id = $_GET['threadid'];
 
     $sql = "SELECT * FROM `threads` WHERE thread_id=$id";
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($conn, $sql);
 
     while($row = mysqli_fetch_assoc($result)){
         $title = $row['thread_title'];
@@ -37,7 +37,32 @@
     ?>
 
 
-    <!-- Category container starts here   Ca -->
+    <?php
+    $showAlert = false;
+    $method = $_SERVER['REQUEST_METHOD'];
+    if($method == 'POST'){
+        // Insert intot comment db
+        $comment = $_POST['comment'];
+        $sql = "INSERT INTO `comments` ( `comment_content`, `thread_id`, `comment_by`, `comment_time`) VALUES ('$comment', '$id', '0', CURRENT_TIMESTAMP)";
+        $result = mysqli_query($conn, $sql);
+        
+        $showAlert= true;
+        
+        if($showAlert){
+            echo '
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Your comment has been added!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            ';
+        }
+    }
+    ?>
+
+
+    <!-- Thread container starts here   Ca -->
     <div class="container my-4">
         <div class="jumbotron">
             <h1 class="display-4"><?php echo $title; ?></h1>
@@ -86,11 +111,13 @@
 
             $id = $row['comment_id'];
             $content = $row['comment_content'];
+            $comment_time = $row['comment_time'];
         
             echo '
                 <div class=" media my-3">
                     <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
                     <div class="media-body">
+                        <p class="font-weight-bold my-0">Anonymous User at '. $comment_time .' </p>
                         '. $content .'
                     </div>
                 </div>';
@@ -99,8 +126,8 @@
         if($noResult){
             echo '<div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                    <p class="display-4">No Threads Found</p>
-                    <p class="lead">Be the first person to ask a question</p>
+                    <p class="display-4">No Comment Found</p>
+                    <p class="lead">Be the first person to comment this thread</p>
                     </div>
                 </div>';
         }

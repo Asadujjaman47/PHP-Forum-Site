@@ -42,7 +42,7 @@
     $showAlert = false;
     $method = $_SERVER['REQUEST_METHOD'];
     if($method == 'POST'){
-        // Insert intot thread into db
+        // Insert intot thread db
         $th_title = $_POST['title'];
         $th_desc = $_POST['desc'];
         $sql = "INSERT INTO `threads` (`thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `timestamp`) VALUES ('$th_title', '$th_desc', '$id', '0', CURRENT_TIMESTAMP)";
@@ -65,7 +65,7 @@
 
 
 
-    <!-- Category container starts here   Ca -->
+    <!-- Category container starts here -->
     <div class="container my-4">
         <div class="jumbotron">
             <h1 class="display-4">Welcome to <?php echo $catname; ?> forums</h1>
@@ -77,6 +77,7 @@
             <a class="btn btn-success btn-lg" href="#" role="button">Learn more</a>
         </div>
     </div>
+
 
     <div class="container">
         <h1 class="py-2">Start a Discussion</h1>
