@@ -79,26 +79,40 @@
     </div>
 
 
-    <div class="container">
-        <h1 class="py-2">Start a Discussion</h1>
+    <?php
 
-        <!-- <form action="/forum/threadlist.php?catid=$id" method="post"> -->
-        <form action="<?php $_SERVER['REQUEST_URI'] ?>" method="post">
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
 
-            <div class="form-group">
-                <label for="title">Problem Title</label>
-                <input type="text" class="form-control" id="title" name="title" aria-describedby=" emailHelp">
-                <small id="emailHelp" class="form-text text-muted">Keep your title as short and crip as
-                    possible</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Elaborate Your Concern</label>
-                <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
-            </div>
+    echo '<div class="container">
+            <h1 class="py-2">Start a Discussion</h1>
 
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
-    </div>
+            <!-- <form action="/forum/threadlist.php?catid=$id" method="post"> -->
+            <form action=" ' .$_SERVER["REQUEST_URI"] .'" method="post">
+
+                <div class="form-group">
+                    <label for="title">Problem Title</label>
+                    <input type="text" class="form-control" id="title" name="title" aria-describedby=" emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">Keep your title as short and crip as
+                        possible</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Elaborate Your Concern</label>
+                    <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>';
+    }
+    else{
+        echo '<div class="container">
+                <h1 class="py-2">Start a Discussion</h1>
+                <p class="lead">You are not logged in. Please login to be able to start a Discussion...</p>
+            </div>';
+    }
+    ?>
+
+    
 
 
     <div class="container" id="ques">
