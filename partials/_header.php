@@ -40,7 +40,7 @@ echo '
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                     <p class="text-light my-0 mx-2">Welcome '. $_SESSION['useremail']. ' </p>
-                    <button class="btn btn-outline-success mx-2" data-toggle="modal" data-target="#signupModal">Logout</button>
+                    <a href="partials/_logout.php" class="btn btn-outline-success mx-2">Logout</a>
                 </form>
             ';
         }
