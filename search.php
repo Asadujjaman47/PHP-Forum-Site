@@ -11,7 +11,7 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <style>
-    .container {
+    #maincontainer {
         min-height: 87vh;
     }
     </style>
@@ -24,25 +24,52 @@
     <?php include 'partials/_header.php'; ?>
 
 
+
+
     <!-- Search Result -->
-    <div class="container my-3">
+    <div class="container my-3" id="maincontainer">
         <h1 class="py-3">Search result for "<em><?php echo $_GET['search']?>"</em></h1>
-        <div class="result">
-            <h3><a href="/categories/dff" class="text-dark">Cannot install pyaudio</a></h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam necessitatibus officiis explicabo at reprehenderit, natus nisi ad ex obcaecati assumenda quas voluptatibus consequatur eum in nobis quos. Earum, quae explicabo repudiandae sit voluptas et fugit architecto no</p>
-        </div>
 
-        <div class="result">
-            <h3><a href="/categories/dff" class="text-dark">Cannot install pyaudio</a></h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam necessitatibus officiis explicabo at reprehenderit, natus nisi ad ex obcaecati assumenda quas voluptatibus consequatur eum in nobis quos. Earum, quae explicabo repudiandae sit voluptas et fugit architecto no</p>
-        </div>
+        <?php
+        $noresults = true;
 
-        <div class="result">
-            <h3><a href="/categories/dff" class="text-dark">Cannot install pyaudio</a></h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam necessitatibus officiis explicabo at reprehenderit, natus nisi ad ex obcaecati assumenda quas voluptatibus consequatur eum in nobis quos. Earum, quae explicabo repudiandae sit voluptas et fugit architecto no</p>
-        </div>
+        $query = $_GET["search"];
+        $sql = "SELECT * FROM `threads` WHERE MATCH (thread_title, thread_desc) against ('$query')";
+        $result = mysqli_query($conn, $sql);
+
+        while($row = mysqli_fetch_assoc($result)){
+            $title = $row['thread_title'];
+            $desc = $row['thread_desc'];
+            $thread_id = $row['thread_id'];
+            
+            $url = "thread.php?threadid=". $thread_id;
+            $noresults = false;
 
 
+            // Display the search result
+            echo '
+                <div class="result">
+                    <h3><a href="'. $url .'" class="text-dark">'. $title .'</a></h3>
+                    <p>'. $desc .'</p>
+                </div>
+            ';
+        }
+
+        if($noresults){
+            echo '<div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                    <p class="display-4">No Results Found!</p>
+                    <p class="lead"> Suggestions: <ul>
+                            <li>Make sure that all words are splled correctly.</li>
+                            <li>Try different eywords.</li>
+                            <li>Try more general keywords.</li>
+                        </ul>
+                    </p>
+                    </div>
+                </div>';
+        }
+
+        ?>
 
     </div>
 

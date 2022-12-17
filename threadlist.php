@@ -34,7 +34,7 @@
         $catname = $row['category_name'];
         $catdes = $row['category_description'];
     }
-
+    
     ?>
 
 
@@ -128,7 +128,7 @@
     
 
 
-    <div class="container" id="ques">
+    <div class="container mb-5" id="ques">
         <h1 class="py-2">Browse Questions</h1>
 
         <?php

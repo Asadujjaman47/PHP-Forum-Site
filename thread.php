@@ -90,9 +90,8 @@
         </div>
     </div>
 
-
-
     <?php
+
 
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
 
@@ -129,9 +128,7 @@ else{
 
 
 
-
-
-    <div class="container" id="ques">
+    <div class="container mb-5" id="ques">
         <h1 class="py-2">Discussions</h1>
 
         <?php
