@@ -9,13 +9,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    
+
     <style>
-        #ques{
-            min-height : 433px;
-        }
+    #ques {
+        min-height: 433px;
+    }
     </style>
-    
+
     <title>Welcome to iDiscuss - Coding Forums</title>
 </head>
 
@@ -32,14 +32,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://source.unsplash.com/900x200/?automation,computing" class="d-block w-100" alt="...">
+                <img src="https://source.unsplash.com/900x200/?code,pogram" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://source.unsplash.com/900x200/?technology,communication" class="d-block w-100"
-                    alt="...">
+                <img src="https://source.unsplash.com/900x200/?programming,coding" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://source.unsplash.com/900x200/?technology,code" class="d-block w-100" alt="...">
+                <img src="https://source.unsplash.com/900x200/?developer,development" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
@@ -93,7 +92,7 @@
 
     </div>
 
-    
+
 
     <?php include 'partials/_footer.php'; ?>
 

@@ -38,6 +38,33 @@
     ?>
 
 
+    <?php
+    $showAlert = false;
+    $method = $_SERVER['REQUEST_METHOD'];
+    if($method == 'POST'){
+        // Insert intot thread into db
+        $th_title = $_POST['title'];
+        $th_desc = $_POST['desc'];
+        $sql = "INSERT INTO `threads` (`thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `timestamp`) VALUES ('$th_title', '$th_desc', '$id', '0', CURRENT_TIMESTAMP)";
+        $result = mysqli_query($conn, $sql);
+        
+        $showAlert= true;
+        
+        if($showAlert){
+            echo '
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Your thread has been added! Please wait for community to response.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            ';
+        }
+    }
+    ?>
+
+
+
     <!-- Category container starts here   Ca -->
     <div class="container my-4">
         <div class="jumbotron">
@@ -54,11 +81,14 @@
     <div class="container">
         <h1 class="py-2">Start a Discussion</h1>
 
-        <form>
+        <!-- <form action="/forum/threadlist.php?catid=$id" method="post"> -->
+        <form action="<?php $_SERVER['REQUEST_URI'] ?>" method="post">
+
             <div class="form-group">
                 <label for="title">Problem Title</label>
                 <input type="text" class="form-control" id="title" name="title" aria-describedby=" emailHelp">
-                <small id="emailHelp" class="form-text text-muted">Keep your title as short and crip as possible</small>
+                <small id="emailHelp" class="form-text text-muted">Keep your title as short and crip as
+                    possible</small>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Elaborate Your Concern</label>
@@ -109,10 +139,7 @@
                     </div>
                 </div>';
         }
-
         ?>
-
-
 
     </div>
 
