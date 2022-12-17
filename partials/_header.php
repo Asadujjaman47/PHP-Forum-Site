@@ -19,14 +19,21 @@ echo '
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                Categories
+                Top Categories
                 </a>
-                <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+                <div class="dropdown-menu">';
+
+
+
+                $sql = "SELECT Category_name, category_id FROM `categories` LIMIT 3";
+                $result = mysqli_query($conn, $sql);
+
+                while($row = mysqli_fetch_assoc($result)){
+                   echo '<a class="dropdown-item" href="threadlist.php?catid='. $row['category_id'] .'">'. $row['Category_name'] .'</a>';
+                }
+                
+                
+                echo '</div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="contact.php">Contact</a>

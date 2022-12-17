@@ -11,10 +11,38 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <title>Welcome to iDiscuss - Coding Forums</title>
+
+    <style>
+        .container{
+            min-height: 86vh;
+        }
+    </style>
 </head>
 
 <body>
+    <?php include 'partials/_dbconnect.php'; ?>
     <?php include 'partials/_header.php'; ?>
+
+
+    <div class="container my-3">
+        <h1 class="text-center">Contact Us</h1>
+
+        // PICK A FROM FROM BOOTSTRAP
+
+        <form action="">
+
+
+        <button class="btn btn-success">Submit</button>
+
+        </form>
+
+
+
+
+    </div>
+
+
+
 
 
     <?php include 'partials/_footer.php'; ?>
