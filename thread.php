@@ -43,7 +43,8 @@
     if($method == 'POST'){
         // Insert intot comment db
         $comment = $_POST['comment'];
-        $sql = "INSERT INTO `comments` ( `comment_content`, `thread_id`, `comment_by`, `comment_time`) VALUES ('$comment', '$id', '0', CURRENT_TIMESTAMP)";
+        $sno = $_POST["sno"];
+        $sql = "INSERT INTO `comments` ( `comment_content`, `thread_id`, `comment_by`, `comment_time`) VALUES ('$comment', '$id', '$sno', CURRENT_TIMESTAMP)";
         $result = mysqli_query($conn, $sql);
         
         $showAlert= true;
@@ -93,6 +94,7 @@ echo '
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Type Your comment</label>
                 <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                <input type="hidden" name="sno" value="'. $_SESSION["sno"] .'">
             </div>
 
             <button type="submit" class="btn btn-success">Post Comment</button>
@@ -132,12 +134,17 @@ else{
             $id = $row['comment_id'];
             $content = $row['comment_content'];
             $comment_time = $row['comment_time'];
+
+            $thread_user_id = $row['comment_by'];
+            $sql2 = "SELECT user_email FROM `users` WHERE sno='$thread_user_id'";
+            $result2 = mysqli_query($conn, $sql2);
+            $row2= mysqli_fetch_assoc($result2);
         
             echo '
                 <div class=" media my-3">
                     <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
                     <div class="media-body">
-                        <p class="font-weight-bold my-0">Anonymous User at '. $comment_time .' </p>
+                        <p class="font-weight-bold my-0">'. $row2['user_email'] .' at '. $comment_time .' </p>
                         '. $content .'
                     </div>
                 </div>';

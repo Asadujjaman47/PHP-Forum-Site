@@ -45,7 +45,8 @@
         // Insert intot thread db
         $th_title = $_POST['title'];
         $th_desc = $_POST['desc'];
-        $sql = "INSERT INTO `threads` (`thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `timestamp`) VALUES ('$th_title', '$th_desc', '$id', '0', CURRENT_TIMESTAMP)";
+        $sno = $_POST["sno"];
+        $sql = "INSERT INTO `threads` (`thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `timestamp`) VALUES ('$th_title', '$th_desc', '$id', '$sno', CURRENT_TIMESTAMP)";
         $result = mysqli_query($conn, $sql);
         
         $showAlert= true;
@@ -95,6 +96,7 @@
                     <small id="emailHelp" class="form-text text-muted">Keep your title as short and crip as
                         possible</small>
                 </div>
+                <input type="hidden" name="sno" value="'. $_SESSION["sno"] .'">
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Elaborate Your Concern</label>
                     <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
@@ -124,7 +126,7 @@
 
         $sql = "SELECT * FROM `threads` WHERE thread_cat_id=$id";
         
-        $result = mysqli_query($conn,$sql);
+        $result = mysqli_query($conn, $sql);
         
         $noResult = true;
 
@@ -135,16 +137,22 @@
             $title = $row['thread_title'];
             $desc = $row['thread_desc'];
             $thread_time = $row['timestamp'];
+            $thread_user_id = $row['thread_user_id'];
+            
+            $sql2 = "SELECT user_email FROM `users` WHERE sno='$thread_user_id'";
+            $result2 = mysqli_query($conn, $sql2);
+            $row2= mysqli_fetch_assoc($result2);
+            
             
         
             echo '
                 <div class=" media my-3">
                     <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
                     <div class="media-body">
-                    <p class="font-weight-bold my-0">Anonymous User at '. $thread_time .' </p>
                         <h5 class="mt-0"><a class="text-dark" href="thread.php?threadid='. $id .'">'. $title .'</a></h5>
                         <p>'. $desc .'</p>
                     </div>
+                    <div class="font-weight-bold my-0"> Asked by: '. $row2['user_email'] .' at '. $thread_time .' </div>
                 </div>';
         }
 
