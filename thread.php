@@ -11,9 +11,9 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <style>
-        #ques{
-            min-height : 450px;
-        }
+    #ques {
+        min-height: 450px;
+    }
     </style>
     <title>Welcome to iDiscuss - Coding Forums</title>
 </head>
@@ -49,7 +49,7 @@
             <p><b>Posted by: Harry</b></p>
         </div>
     </div>
-    
+
 
     <div class="container" id="ques">
         <h1 class="py-2">Discussions</h1>
@@ -62,7 +62,11 @@
         
         $result = mysqli_query($conn,$sql);
 
+        $noResult = true;
+
         while($row = mysqli_fetch_assoc($result)){
+            $noResult = false;
+
             $id = $row['thread_id'];
             $title = $row['thread_title'];
             $desc = $row['thread_desc'];
@@ -73,6 +77,15 @@
                     <div class="media-body">
                         <h5 class="mt-0"><a class="text-dark" href="thread.php">'. $title .'</a></h5>
                         <p>'. $desc .'</p>
+                    </div>
+                </div>';
+        }
+
+        if($noResult){
+            echo '<div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                    <p class="display-4">No Threads Found</p>
+                    <p class="lead">Be the first person to ask a question</p>
                     </div>
                 </div>';
         }

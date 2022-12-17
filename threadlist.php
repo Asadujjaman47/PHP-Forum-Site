@@ -11,9 +11,9 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <style>
-        #ques{
-            min-height : 450px;
-        }
+    #ques {
+        min-height: 450px;
+    }
     </style>
     <title>Welcome to iDiscuss - Coding Forums</title>
 </head>
@@ -21,6 +21,7 @@
 <body>
     <?php include 'partials/_header.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
+
 
     <?php
 
@@ -50,6 +51,25 @@
         </div>
     </div>
 
+    <div class="container">
+        <h1 class="py-2">Start a Discussion</h1>
+
+        <form>
+            <div class="form-group">
+                <label for="title">Problem Title</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby=" emailHelp">
+                <small id="emailHelp" class="form-text text-muted">Keep your title as short and crip as possible</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Elaborate Your Concern</label>
+                <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+
+
     <div class="container" id="ques">
         <h1 class="py-2">Browse Questions</h1>
 
@@ -60,8 +80,12 @@
         $sql = "SELECT * FROM `threads` WHERE thread_cat_id=$id";
         
         $result = mysqli_query($conn,$sql);
+        
+        $noResult = true;
 
         while($row = mysqli_fetch_assoc($result)){
+            $noResult = false;
+
             $id = $row['thread_id'];
             $title = $row['thread_title'];
             $desc = $row['thread_desc'];
@@ -76,7 +100,19 @@
                 </div>';
         }
 
+        // echo var_dump($noResult);
+        if($noResult){
+            echo '<div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                    <p class="display-4">No Threads Found</p>
+                    <p class="lead">Be the first person to ask a question</p>
+                    </div>
+                </div>';
+        }
+
         ?>
+
+
 
     </div>
 
