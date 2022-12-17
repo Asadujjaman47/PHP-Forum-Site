@@ -71,7 +71,7 @@
             <p>This is a peer to peer forum. No Spam / Advertising / Self-promote in the forums is not allowed. Do not
                 post copyright-infringing material. Do not post “offensive” posts, links or images. Do not cross post
                 questions. Remain respectful of other members at all times.</p>
-            <p><b>Posted by: Harry</b></p>
+            <p>Posted by: <b>Harry</b></p>
         </div>
     </div>
 

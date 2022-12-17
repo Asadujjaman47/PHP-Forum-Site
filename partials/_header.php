@@ -37,9 +37,21 @@ echo '
         <button class="btn btn-outline-success mx-2" data-toggle="modal" data-target="#signupModal">Signup</button>
     </div>
 </nav>
-
 ';
 
 include 'partials/_loginModal.php';
 include 'partials/_signupModal.php';
+
+if(isset($_GET['signupsuccess']) && $_GET['signupsuccess']=="true"){
+    echo '
+        <div class="alert alert-success alert-dismissible fade show my-0" role="alert">
+            <strong>Success!</strong> You can login
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    ';
+}
+
+
 ?>
