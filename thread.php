@@ -51,32 +51,47 @@
     </div>
 
 
+    <div class="container">
+        <h1 class="py-2">Post a Comment</h1>
+
+        <!-- <form action="/forum/threadlist.php?catid=$id" method="post"> -->
+        <form action="<?php $_SERVER['REQUEST_URI'] ?>" method="post">
+
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Type Your comment</label>
+                <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Post Comment</button>
+        </form>
+    </div>
+
+
     <div class="container" id="ques">
         <h1 class="py-2">Discussions</h1>
 
-        <!-- <?php
+        <?php
 
-        $id = $_GET['catid'];
+        $id = $_GET['threadid'];
 
-        $sql = "SELECT * FROM `threads` WHERE thread_cat_id=$id";
+        $sql = "SELECT * FROM `comments` WHERE thread_id=$id";
         
-        $result = mysqli_query($conn,$sql);
+        $result = mysqli_query($conn, $sql);
 
         $noResult = true;
 
         while($row = mysqli_fetch_assoc($result)){
             $noResult = false;
 
-            $id = $row['thread_id'];
-            $title = $row['thread_title'];
-            $desc = $row['thread_desc'];
+            $id = $row['comment_id'];
+            $content = $row['comment_content'];
         
             echo '
                 <div class=" media my-3">
                     <img src="img/userdefault.png" width="54px" class=" mr-3" alt="...">
                     <div class="media-body">
-                        <h5 class="mt-0"><a class="text-dark" href="thread.php">'. $title .'</a></h5>
-                        <p>'. $desc .'</p>
+                        '. $content .'
                     </div>
                 </div>';
         }
@@ -90,7 +105,7 @@
                 </div>';
         }
 
-        ?> -->
+        ?>
 
     </div>
 
