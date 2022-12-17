@@ -32,17 +32,31 @@
     while($row = mysqli_fetch_assoc($result)){
         $title = $row['thread_title'];
         $desc = $row['thread_desc'];
+
+        
+        // Query the users table to find out the name of OP
+        $thread_user_id = $row['thread_user_id'];
+
+        $sql2 = "SELECT user_email FROM `users` WHERE sno='$thread_user_id'";
+        $result2 = mysqli_query($conn, $sql2);
+        $row2 = mysqli_fetch_assoc($result2);
+        $posted_by = $row2['user_email'];
     }
 
     ?>
 
-
-    <?php
+    <?php   
     $showAlert = false;
     $method = $_SERVER['REQUEST_METHOD'];
     if($method == 'POST'){
         // Insert intot comment db
         $comment = $_POST['comment'];
+
+        // handle < , >
+        $comment = str_replace("<", "&lt", $comment);
+        $comment = str_replace(">", "&gt", $comment);
+
+        
         $sno = $_POST["sno"];
         $sql = "INSERT INTO `comments` ( `comment_content`, `thread_id`, `comment_by`, `comment_time`) VALUES ('$comment', '$id', '$sno', CURRENT_TIMESTAMP)";
         $result = mysqli_query($conn, $sql);
@@ -72,7 +86,7 @@
             <p>This is a peer to peer forum. No Spam / Advertising / Self-promote in the forums is not allowed. Do not
                 post copyright-infringing material. Do not post “offensive” posts, links or images. Do not cross post
                 questions. Remain respectful of other members at all times.</p>
-            <p>Posted by: <b>Harry</b></p>
+            <p>Posted by: <em> <?php echo $posted_by; ?> </em></p>
         </div>
     </div>
 
@@ -94,7 +108,9 @@ echo '
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Type Your comment</label>
                 <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+
                 <input type="hidden" name="sno" value="'. $_SESSION["sno"] .'">
+                
             </div>
 
             <button type="submit" class="btn btn-success">Post Comment</button>
@@ -153,8 +169,8 @@ else{
         if($noResult){
             echo '<div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                    <p class="display-4">No Comment Found</p>
-                    <p class="lead">Be the first person to comment this thread</p>
+                    <p class="display-4">No Comment Found!</p>
+                    <p class="lead">Be the first person to comment</p>
                     </div>
                 </div>';
         }

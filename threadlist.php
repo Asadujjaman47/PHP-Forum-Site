@@ -45,6 +45,15 @@
         // Insert intot thread db
         $th_title = $_POST['title'];
         $th_desc = $_POST['desc'];
+
+        // handle < , >
+        $th_title = str_replace("<", "&lt", $th_title);
+        $th_title = str_replace(">", "&gt", $th_title);
+
+        $th_desc = str_replace("<", "&lt", $th_desc);
+        $th_desc = str_replace(">", "&gt", $th_desc);
+
+        
         $sno = $_POST["sno"];
         $sql = "INSERT INTO `threads` (`thread_title`, `thread_desc`, `thread_cat_id`, `thread_user_id`, `timestamp`) VALUES ('$th_title', '$th_desc', '$id', '$sno', CURRENT_TIMESTAMP)";
         $result = mysqli_query($conn, $sql);
@@ -96,7 +105,9 @@
                     <small id="emailHelp" class="form-text text-muted">Keep your title as short and crip as
                         possible</small>
                 </div>
+
                 <input type="hidden" name="sno" value="'. $_SESSION["sno"] .'">
+                
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Elaborate Your Concern</label>
                     <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
